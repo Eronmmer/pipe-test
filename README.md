@@ -23,6 +23,10 @@ Here's a quick breakdown of what you can do with this pretty little app.
 ![Export](/public/export.jpg)
 ![Import](/public/import.jpg)
 
+## Tech stack
+
+- React + TypeScript + ChakraUI(UI component library)
+
 ## Installation and Local Setup
 
 Run the command `git clone https://github.com/Eronmmer/pipe-test` on your terminal to clone this repo to your current directory.
