@@ -28,9 +28,9 @@ interface ModalProps {
   type: "mrr" | "termLength" | "invoiceNumber";
   isTermLengthOpen?: boolean;
   onTermLengthClose?: () => void;
-  isMRROpen?: boolean | undefined;
+  isMRROpen?: boolean;
   onMRRClose?: () => void;
-  isInvoiceNumberOpen?: boolean | undefined;
+  isInvoiceNumberOpen?: boolean;
   onInvoiceNumberClose?: () => void;
 }
 
@@ -83,21 +83,19 @@ export const FilterModal: React.FC<ModalProps> = (props) => {
   return (
     <Modal
       isCentered
-      // @ts-ignore
       isOpen={
         type === "mrr"
-          ? isMRROpen
+          ? isMRROpen || true
           : type === "invoiceNumber"
-          ? isInvoiceNumberOpen
-          : isTermLengthOpen
+          ? isInvoiceNumberOpen || true
+          : isTermLengthOpen || true
       }
-      // @ts-ignore
       onClose={
         type === "mrr"
-          ? onMRRClose
+          ? onMRRClose || (() => true)
           : type === "invoiceNumber"
-          ? onInvoiceNumberClose
-          : onTermLengthClose
+          ? onInvoiceNumberClose || (() => true)
+          : onTermLengthClose || (() => true)
       }
     >
       <ModalOverlay />
@@ -122,8 +120,7 @@ export const FilterModal: React.FC<ModalProps> = (props) => {
             </Select>
             <NumberInput
               value={currentOperand}
-              // @ts-ignore
-              onChange={(value) => setCurrentOperand(value)}
+              onChange={(value) => setCurrentOperand(Number(value))}
             >
               <NumberInputField />
               <NumberInputStepper>

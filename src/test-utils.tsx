@@ -6,7 +6,6 @@ const AllProviders = ({ children }: { children?: React.ReactNode }) => (
   <ChakraProvider theme={theme}>{children}</ChakraProvider>
 );
 
-// @ts-ignore
 const customRender = (ui: React.ReactElement, options?: RenderOptions) =>
   render(ui, { wrapper: AllProviders, ...options });
 

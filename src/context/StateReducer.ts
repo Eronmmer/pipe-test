@@ -138,7 +138,6 @@ const StateReducer = (state: State, action: ActionType): State => {
         ...state,
         filter: {
           ...state.filter,
-          // @ts-ignore
           ...payload.filter,
         },
         selectedColumns: payload.selectedColumns,

@@ -1,59 +1,36 @@
-This project was bootstrapped with
-[Create React App](https://github.com/facebook/create-react-app).
+# Table Builder
 
-## Available Scripts
+- **Demo**: https://erons-pipe.netlify.app/
 
-In the project directory, you can run:
+Could you imagine a more interesting way to quickly build customizable views of various database tables? 😃 Well, be my guest.
 
-### `yarn start`
+You select the columns you want to be displayed, filter numeric data and I make sure your data conforms to the rules you specify.
 
-Runs the app in the development mode.<br /> Open
-[http://localhost:3000](http://localhost:3000) to view it in the browser.
+There's no catch: That's simply just it :).
 
-The page will reload if you make edits.<br /> You will also see any lint errors
-in the console.
+Here's a quick breakdown of what you can do with this pretty little app.
 
-### `yarn test`
+- You can select at least one column to add from the list of available options on the left.
 
-Launches the test runner in the interactive watch mode.<br /> See the section
-about
-[running tests](https://facebook.github.io/create-react-app/docs/running-tests)
-for more information.
+![Columns](/public/columns.jpg)
 
-### `yarn build`
+- You can filter some numeric data: Term Length, MRR and Invoice Number
 
-Builds the app for production to the `build` folder.<br /> It correctly bundles
-React in production mode and optimizes the build for the best performance.
+![Filter](/public/2.jfif)
 
-The build is minified and the filenames include the hashes.<br /> Your app is
-ready to be deployed!
+- You can export your current config/setting as JSON and import it later to continue right from where you stopped!
 
-See the section about
-[deployment](https://facebook.github.io/create-react-app/docs/deployment) for
-more information.
+![Export](/public/export.jpg)
+![Import](/public/import.jpg)
 
-### `yarn eject`
+## Installation and Local Setup
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Run the command `git clone https://github.com/Eronmmer/pipe-test` on your terminal to clone this repo to your current directory.
 
-If you aren’t satisfied with the build tool and configuration choices, you can
-`eject` at any time. This command will remove the single build dependency from
-your project.
+Run `yarn` or `npm install` to install all required dependencies.
 
-Instead, it will copy all the configuration files and the transitive
-dependencies (webpack, Babel, ESLint, etc) right into your project so you have
-full control over them. All of the commands except `eject` will still work, but
-they will point to the copied scripts so you can tweak them. At this point
-you’re on your own.
+Run `yarn test` or `npm run test` to run tests.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for
-small and middle deployments, and you shouldn’t feel obligated to use this
-feature. However we understand that this tool wouldn’t be useful if you couldn’t
-customize it when you are ready for it.
+Run `yarn start` to run the project locally.
 
-## Learn More
-
-You can learn more in the
-[Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+You're all set 🚀.
