@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useToasts } from "react-toast-notifications";
 import {
   Modal,
   ModalBody,
@@ -7,6 +8,7 @@ import {
   ModalCloseButton,
   ModalContent,
   NumberInput,
+  ModalFooter,
   NumberInputField,
   NumberInputStepper,
   NumberIncrementStepper,
@@ -14,10 +16,13 @@ import {
   HStack,
   Select,
   Button,
+  useClipboard,
+  Textarea,
 } from "@chakra-ui/react";
 import ValidOperators from "types/ValidOperators";
 import { StateContext } from "context/StateProvider";
 import camelToTextCase from "utils/camelToTextCase";
+import isValidConfigImport from "utils/isValidConfigImport";
 
 interface ModalProps {
   type: "mrr" | "termLength" | "invoiceNumber";
@@ -53,10 +58,6 @@ export const FilterModal: React.FC<ModalProps> = (props) => {
   const [currentOperand, setCurrentOperand] = React.useState<number>(0);
 
   const handleSaveFilter = () => {
-    // setFilter({
-    //   ...filter,
-    //   [type]: { operand: currentOperand, operator: currentOperator },
-    // });
     saveFilter(type, currentOperand, currentOperator);
     if (type === "mrr") {
       onMRRClose && onMRRClose();
@@ -136,6 +137,85 @@ export const FilterModal: React.FC<ModalProps> = (props) => {
               Save
             </Button>
             <Button onClick={handleClearFilter} variant="outline">
+              Clear
+            </Button>
+          </HStack>
+        </ModalBody>
+      </ModalContent>
+    </Modal>
+  );
+};
+
+export const ExportModal: React.FC<{
+  isExportOpen: boolean;
+  onExportClose: () => void;
+  data: string;
+}> = ({ isExportOpen, onExportClose, data }) => {
+  const { hasCopied, onCopy } = useClipboard(data);
+
+  return (
+    <Modal isOpen={isExportOpen} onClose={onExportClose}>
+      <ModalOverlay />
+      <ModalContent>
+        <ModalHeader>Export Table Config</ModalHeader>
+        <ModalCloseButton />
+        <ModalBody>{data}</ModalBody>
+        <ModalFooter>
+          <Button colorScheme="blue" mr={3} onClick={onExportClose}>
+            Close
+          </Button>
+          <Button onClick={onCopy} variant="outline">
+            {hasCopied ? "Copied" : "Copy config to clipboard"}
+          </Button>
+        </ModalFooter>
+      </ModalContent>
+    </Modal>
+  );
+};
+
+export const ImportModal: React.FC<{
+  isImportOpen: boolean;
+  onImportClose: () => void;
+}> = ({ isImportOpen, onImportClose }) => {
+  const { importConfig } = React.useContext(StateContext);
+  const [value, setValue] = React.useState("");
+  const { addToast } = useToasts();
+
+  const handleImport = () => {
+    try {
+      const parsedConfig = JSON.parse(value);
+      const validConfig = isValidConfigImport(parsedConfig);
+      if (validConfig) {
+        importConfig(parsedConfig);
+      } else {
+        addToast("Wrong Config Format", { appearance: "error" });
+      }
+    } catch (err) {
+      addToast("Wrong Config Format", { appearance: "error" });
+      console.log("fuckkkk");
+    }
+    onImportClose();
+  };
+  return (
+    <Modal isOpen={isImportOpen} onClose={onImportClose}>
+      <ModalOverlay />
+      <ModalContent>
+        <ModalHeader>JSON Import</ModalHeader>
+        <ModalCloseButton />
+        <ModalBody>
+          <Textarea
+            height="11rem"
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
+            placeholder="Here is a sample placeholder"
+            size="sm"
+          />
+
+          <HStack my="2rem">
+            <Button onClick={handleImport} colorScheme="orange" mr="1rem">
+              Import
+            </Button>
+            <Button onClick={() => setValue("")} variant="outline">
               Clear
             </Button>
           </HStack>

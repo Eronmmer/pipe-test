@@ -6,6 +6,7 @@ import {
   SET_SELECTED_COLUMNS,
   SAVE_FILTER,
   UPDATE_FILTERED_DATA,
+  IMPORT,
 } from "./types";
 import ValidColumnNames from "types/ValidColumnNames";
 import Data from "utils/data.json";
@@ -36,6 +37,7 @@ export const initialState: State = {
   clearMRRFilter: () => true,
   clearInvoiceNumberFilter: () => true,
   saveFilter: () => true,
+  importConfig: () => true,
 };
 
 export type State = {
@@ -52,6 +54,10 @@ export type State = {
     operand: number,
     operator: ValidOperators,
   ) => void;
+  importConfig: (configData: {
+    filter: Filter;
+    selectedColumns: ValidColumnNames[];
+  }) => void;
 };
 
 type ActionType = {
@@ -126,6 +132,16 @@ const StateReducer = (state: State, action: ActionType): State => {
         selectedColumns: state.selectedColumns.includes(payload)
           ? state.selectedColumns
           : [...state.selectedColumns, payload],
+      };
+    case IMPORT:
+      return {
+        ...state,
+        filter: {
+          ...state.filter,
+          // @ts-ignore
+          ...payload.filter,
+        },
+        selectedColumns: payload.selectedColumns,
       };
     default:
       return state;

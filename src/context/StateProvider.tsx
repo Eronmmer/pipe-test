@@ -1,4 +1,5 @@
 import * as React from "react";
+import Filter from "types/Filter";
 import ValidColumnNames from "types/ValidColumnNames";
 import ValidOperators from "types/ValidOperators";
 import stateReducer, { initialState, State } from "./StateReducer";
@@ -6,6 +7,7 @@ import {
   CLEAR_INVOICE_NUMBER_FILTER,
   CLEAR_MRR_FILTER,
   CLEAR_TERM_LENGTH_FILTER,
+  IMPORT,
   SAVE_FILTER,
   SET_SELECTED_COLUMNS,
   UPDATE_FILTERED_DATA,
@@ -39,6 +41,19 @@ const StateProvider: React.FC<{ children?: React.ReactElement }> = (props) => {
     dispatch({ type: SAVE_FILTER, payload: { type, operand, operator } });
     dispatch({ type: UPDATE_FILTERED_DATA });
   };
+  const importConfig = (configData: {
+    filter: Filter;
+    selectedColumns: ValidColumnNames[];
+  }) => {
+    dispatch({
+      type: IMPORT,
+      payload: {
+        filter: configData.filter,
+        selectedColumns: configData.selectedColumns,
+      },
+    });
+    dispatch({ type: UPDATE_FILTERED_DATA });
+  };
 
   return (
     <StateContext.Provider
@@ -52,6 +67,7 @@ const StateProvider: React.FC<{ children?: React.ReactElement }> = (props) => {
         clearMRRFilter: clearMRRFilter,
         clearTermLengthFilter: clearTermLengthFilter,
         saveFilter: saveFilter,
+        importConfig: importConfig,
       }}
     >
       {props.children}
