@@ -23,6 +23,13 @@ Here's a quick breakdown of what you can do with this pretty little app.
 ![Export](/public/export.jpg)
 ![Import](/public/import.jpg)
 
+## Extras
+
+- You can deselect a column by clicking on it again. As for the last 3 numeric columns, you have to click on the text i.e(MRR, Invoice Number or Term Length) to deselect. Clicking on the filter button will only open a filter modal where you can clear or save a filter.
+- During importation, the JSON string is thoroughly validated and parsed to ensure that the right string exported from the app initially was used.
+- You can copy the content of the Table Config to the clipboard by just clicking on a button
+- You get a 'no match found message' when none of the data in visible columns match your filter
+
 ## Tech stack
 
 - React + TypeScript + ChakraUI(UI component library)

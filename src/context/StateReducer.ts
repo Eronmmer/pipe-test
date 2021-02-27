@@ -130,7 +130,7 @@ const StateReducer = (state: State, action: ActionType): State => {
       return {
         ...state,
         selectedColumns: state.selectedColumns.includes(payload)
-          ? state.selectedColumns
+          ? state.selectedColumns.filter((e) => e !== payload)
           : [...state.selectedColumns, payload],
       };
     case IMPORT:

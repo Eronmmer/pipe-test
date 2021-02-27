@@ -103,25 +103,28 @@ const EditPanel: React.FC = () => {
           backgroundColor={
             selectedColumns.includes("termLength") ? "#e6eaf8" : "none"
           }
-          onClick={() => handleAddToColumns("termLength")}
         >
-          <Text>Term Length</Text>
+          <Text flex={1} onClick={() => handleAddToColumns("termLength")}>
+            Term Length
+          </Text>
           <FilterButton onClick={onTermLengthOpen}>Filter</FilterButton>
         </ColumNameWithFilter>
         <ColumNameWithFilter
           backgroundColor={selectedColumns.includes("mrr") ? "#e6eaf8" : "none"}
-          onClick={() => handleAddToColumns("mrr")}
         >
-          <Text>MRR</Text>
+          <Text flex={1} onClick={() => handleAddToColumns("mrr")}>
+            MRR
+          </Text>
           <FilterButton onClick={onMRROpen}>Filter</FilterButton>
         </ColumNameWithFilter>
         <ColumNameWithFilter
           backgroundColor={
             selectedColumns.includes("invoiceNumber") ? "#e6eaf8" : "none"
           }
-          onClick={() => handleAddToColumns("invoiceNumber")}
         >
-          <Text>Invoice Number</Text>
+          <Text flex={1} onClick={() => handleAddToColumns("invoiceNumber")}>
+            Invoice Number
+          </Text>
           <FilterButton onClick={onInvoiceNumberOpen}>Filter</FilterButton>
         </ColumNameWithFilter>
       </Box>

@@ -13,6 +13,12 @@ const Columns: React.FC = () => {
             Please select at least one column from the edit panel on the left
           </Text>
         </Flex>
+      ) : filteredData.length === 0 ? (
+        <Flex height="100%" justify="center" align="center">
+          <Text padding="1rem" fontSize="lg" fontWeight="bold">
+            No match found
+          </Text>
+        </Flex>
       ) : (
         <Box minWidth="700px">
           <HStack padding=".7rem 1rem" backgroundColor="#f8f9fb">
