@@ -83,19 +83,21 @@ export const FilterModal: React.FC<ModalProps> = (props) => {
   return (
     <Modal
       isCentered
+      // @ts-ignore
       isOpen={
         type === "mrr"
-          ? isMRROpen || true
+          ? isMRROpen
           : type === "invoiceNumber"
-          ? isInvoiceNumberOpen || true
-          : isTermLengthOpen || true
+          ? isInvoiceNumberOpen
+          : isTermLengthOpen
       }
+      // @ts-ignore
       onClose={
         type === "mrr"
-          ? onMRRClose || (() => true)
+          ? onMRRClose
           : type === "invoiceNumber"
-          ? onInvoiceNumberClose || (() => true)
-          : onTermLengthClose || (() => true)
+          ? onInvoiceNumberClose
+          : onTermLengthClose
       }
     >
       <ModalOverlay />
